@@ -49,12 +49,27 @@ gitleaks git --staged \
   --report-path .audit/last-scan.json --report-format json
 ```
 
-## 6. Allowlisting your own config file
-The `.gitleaks.toml` itself often contains regex patterns that look like secrets to gitleaks. Allowlist it:
+## 6. Your own files about secrets will trigger the scanner
+
+Two flavours of the same trap:
+
+**a) The config file itself** — `.gitleaks.toml` often contains regex patterns that look secret-shaped.
+
+**b) Documentation/learning notes** — any markdown describing token formats (e.g., a file that mentions `ghp_AbCdEf...` as an example) will be scanned and blocked.
+
+Same fix for both — allowlist the literal example values:
 ```toml
 [allowlist]
-paths = ['''\.gitleaks\.toml$''']
+paths = [
+  '''\.gitleaks\.toml$''',         # the config file itself
+]
+regexes = [
+  '''ghp_AbCdEf1234567890AbCdEf1234567890AbCd''',  # docs example PAT
+  '''AKIAZ7K9N4Q2L8M3P5R1''',                       # docs example AWS key
+]
 ```
+
+**Rule of thumb:** every time you write *about* a secret format, add the literal example to `[allowlist].regexes` in the same commit. You'll hit this on the very next commit otherwise.
 
 ## 7. Where to add custom rules
 ```toml
