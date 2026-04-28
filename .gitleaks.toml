@@ -26,4 +26,9 @@ paths = [
 regexes = [
   '''AKIAIOSFODNN7EXAMPLE''',
   '''wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY''',
+  # Documentation example PATs (used in learnings/ to demonstrate gitleaks):
+  '''ghp_AbCdEf1234567890AbCdEf1234567890AbCd''',
+  '''AKIAZ7K9N4Q2L8M3P5R1''',
+  '''wJalrXUtnFEMI/K7MDENG/bPxRfiCYzFAKEKEY01''',
+  '''wJalrXUtnFEMI/K7MDENG/bPxRfiCYzREALPATTERN''',
 ]
