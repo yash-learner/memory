@@ -1,0 +1,29 @@
+# gitleaks config for ~/memory
+# Inherits the default gitleaks ruleset (AWS, GitHub, Slack, GCP, etc.)
+# Add custom rules below as you discover patterns to block.
+
+[extend]
+useDefault = true
+
+# ── Custom rules ─────────────────────────────────────────────────────────────
+# Example template — uncomment and adapt:
+#
+# [[rules]]
+# id = "internal-marker"
+# description = "Lines marked INTERNAL: should never be committed"
+# regex = '''(?i)^\s*INTERNAL:'''
+# tags = ["custom", "policy"]
+
+# ── Allowlist ────────────────────────────────────────────────────────────────
+# Paths/patterns that are intentional examples (not real secrets).
+[allowlist]
+description = "Global allowlist for ~/memory"
+paths = [
+  '''\.gitleaks\.toml$''',
+  '''\.audit/''',
+]
+# Allow obvious example tokens used in learning notes.
+regexes = [
+  '''AKIAIOSFODNN7EXAMPLE''',
+  '''wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY''',
+]
